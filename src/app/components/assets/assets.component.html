@@ -1,0 +1,2 @@
+<app-create-asset (onCreateAsset)="createAsset($event)"></app-create-asset>
+<app-asset *ngFor="let asset of assets" [asset]="asset" (onDeleteAsset)="deleteAsset($event)"></app-asset>

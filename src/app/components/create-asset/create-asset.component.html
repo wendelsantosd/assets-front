@@ -1,0 +1,20 @@
+@if (showForm) {
+<app-button text="Fechar" color="red" (btnClick)="changeView(false)"></app-button>
+}@else {
+<app-button text="Adicionar Bem" color="green" (btnClick)="changeView(true)"></app-button>
+}
+<form (ngSubmit)="onSubmit()" *ngIf="showForm" class="add-form">
+  <div>
+    <label for="name">Bem:</label>
+    <input id="name" type="text" name="name" class="form-control" placeholder="Digite o nome" [(ngModel)]="name" />
+
+    <label for="value">Valor(R$):</label>
+    <input id="value" type="number" name="value" class="form-control" placeholder="Digite o valor"
+      [(ngModel)]="value" />
+
+    <label for="date">Data de aquisição:</label>
+    <input id="date" type="date" name="date" class="form-control" [(ngModel)]="date" />
+  </div>
+
+  <input type="submit" value="Salvar Bem" class="btn btn-block" />
+</form>
