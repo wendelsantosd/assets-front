@@ -15,11 +15,15 @@ export class AssetsService {
     return this.http.get<IAsset[]>(this.apiUrl);
   }
 
-  deleteAsset(asset: IAsset): Observable<IAsset> {
-    return this.http.delete<IAsset>(`${this.apiUrl}/${asset.id}`);
-  }
-
   createAsset(asset: IAsset): Observable<IAsset> {
     return this.http.post<IAsset>(this.apiUrl, asset);
+  }
+
+  updateAsset(asset: IAsset): Observable<IAsset> {
+    return this.http.put<IAsset>(`${this.apiUrl}/${asset.id}`, asset);
+  }
+
+  deleteAsset(asset: IAsset): Observable<IAsset> {
+    return this.http.delete<IAsset>(`${this.apiUrl}/${asset.id}`);
   }
 }

@@ -1,4 +1,18 @@
 <div class="asset">
-  <h3>{{asset.name}} <fa-icon [icon]="faTimes" [ngStyle]="{'color': 'red'}" (click)="onDelete(asset)"></fa-icon></h3>
+  <h3>
+    {{asset.name}}
+    <div class="icons">
+      <fa-icon
+        [icon]="faPen"
+        [ngStyle]="{'fontSize': '20px', 'color': 'green', 'marginRight': '8px', 'marginBottom': '2px'}"
+        (click)="onSelect(asset)">
+      </fa-icon>
+      <fa-icon
+        [icon]="faTimes"
+        [ngStyle]="{'color': 'red'}"
+        (click)="onDelete(asset)">
+      </fa-icon>
+    </div>
+  </h3>
   <p>{{asset.value}}</p>
 </div>

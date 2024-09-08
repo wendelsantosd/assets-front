@@ -1,2 +1,18 @@
-<app-create-asset (onCreateAsset)="createAsset($event)"></app-create-asset>
-<app-asset *ngFor="let asset of assets" [asset]="asset" (onDeleteAsset)="deleteAsset($event)"></app-asset>
+<app-button
+  text="Adicionar Bem"
+  color="green"
+  (click)="openModal(true)">
+</app-button>
+<app-asset
+  *ngFor="let asset of assets"
+  [asset]="asset"
+  (onDeleteAsset)="deleteAsset($event)"
+  (onSelectAsset)="onSelectAsset($event)">
+</app-asset>
+<app-modal-form
+  *ngIf="isOpenModal"
+  [selectedAsset]="selectedAsset"
+  (onCreateAsset)="createAsset($event)"
+  (onUpdateAsset)="updateAsset($event)"
+  (onCloseModal)="openModal($event)">
+</app-modal-form>
