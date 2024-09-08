@@ -3,6 +3,7 @@
   color="green"
   (click)="openModal(true)">
 </app-button>
+<h4>Total em Bens: {{ total | currency: 'BRL' }}</h4>
 <app-asset
   *ngFor="let asset of assets"
   [asset]="asset"

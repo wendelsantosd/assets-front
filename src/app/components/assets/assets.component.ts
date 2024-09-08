@@ -16,6 +16,7 @@ import { ButtonComponent } from '../button/button.component';
 export class AssetsComponent implements OnInit {
   assets: IAsset[] = [];
   selectedAsset!: IAsset;
+  total!: number;
 
   constructor(private readonly assetsService: AssetsService) {}
 
@@ -24,12 +25,14 @@ export class AssetsComponent implements OnInit {
   ngOnInit(): void {
     this.assetsService.getAssets().subscribe((data) => {
       this.assets = data;
+      this.calculate(this.assets);
     });
   }
 
   createAsset(asset: IAsset): void {
     this.assetsService.createAsset(asset).subscribe((asset) => {
       this.assets.push(asset);
+      this.calculate(this.assets);
     });
   }
 
@@ -39,15 +42,15 @@ export class AssetsComponent implements OnInit {
       if (index >= 0) {
         this.assets[index] = asset;
       }
+      this.calculate(this.assets);
     });
   }
 
   deleteAsset(asset: IAsset): void {
-    this.assetsService
-      .deleteAsset(asset)
-      .subscribe(
-        () => (this.assets = this.assets.filter((a) => a.id !== asset.id))
-      );
+    this.assetsService.deleteAsset(asset).subscribe((asset) => {
+      this.assets = this.assets.filter((a) => a.id !== asset.id);
+      this.calculate(this.assets);
+    });
   }
   openModal(value: boolean): void {
     this.isOpenModal = value;
@@ -67,5 +70,11 @@ export class AssetsComponent implements OnInit {
   onSelectAsset(asset: IAsset): void {
     this.selectedAsset = asset;
     this.openModal(true);
+  }
+
+  calculate(assets: IAsset[]): void {
+    this.total = assets.reduce((acc, asset) => {
+      return acc + asset.value;
+    }, 0);
   }
 }

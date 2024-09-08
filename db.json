@@ -1,24 +1,10 @@
 {
   "assets": [
     {
-      "id": "246d65de-678e-4191-ad99-b9f82782f393",
-      "name": "Mouse",
-      "value": 69.99,
-      "date": "2024-09-11",
-      "createdAt": "2022-01-01T00:00:00.000Z",
-      "updatedAt": "2022-01-01T00:00:00.000Z"
-    },
-    {
-      "id": "7ea3",
-      "name": "Computador",
-      "value": 2300,
-      "date": "2024-09-11"
-    },
-    {
-      "id": "4c1f",
-      "name": "TV FULL MAX",
-      "value": 20000,
-      "date": "2024-09-14"
+      "id": "d2e6",
+      "name": "Cadeira",
+      "value": 100000,
+      "date": "2024-09-10"
     }
   ]
 }
