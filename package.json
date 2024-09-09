@@ -7,7 +7,6 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "api": "json-server db.json",
     "serve:ssr:assets-front": "node dist/assets-front/server/server.mjs"
   },
   "private": true,
@@ -22,11 +21,13 @@
     "@angular/platform-server": "^18.2.0",
     "@angular/router": "^18.2.0",
     "@angular/ssr": "^18.2.3",
+    "@apollo/client": "^3.11.8",
     "@fortawesome/angular-fontawesome": "^0.15.0",
     "@fortawesome/free-regular-svg-icons": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
+    "apollo-angular": "^7.1.2",
     "express": "^4.18.2",
-    "json-server": "^1.0.0-beta.2",
+    "graphql": "^16.9.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.10"

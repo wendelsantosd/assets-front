@@ -1,10 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { AssetsService } from '../../services/assets.service';
+import { Apollo } from 'apollo-angular';
 import { IAsset } from '../../interfaces/Asset';
 import { CommonModule } from '@angular/common';
 import { AssetComponent } from '../asset/asset.component';
 import { ModalFormComponent } from '../modal-form/modal-form.component';
 import { ButtonComponent } from '../button/button.component';
+import {
+  CREATE_ASSET,
+  DELETE_ASSET,
+  GET_ASSETS,
+  UPDATE_ASSET,
+} from '../../graphql/graphql.operations';
 
 @Component({
   selector: 'app-assets',
@@ -17,40 +23,99 @@ export class AssetsComponent implements OnInit {
   assets: IAsset[] = [];
   selectedAsset!: IAsset;
   total!: number;
-
-  constructor(private readonly assetsService: AssetsService) {}
-
   isOpenModal: boolean = false;
 
+  constructor(private readonly apollo: Apollo) {}
+
   ngOnInit(): void {
-    this.assetsService.getAssets().subscribe((data) => {
-      this.assets = data;
-      this.calculate(this.assets);
-    });
+    this.getAssets();
+  }
+
+  getAssets() {
+    this.apollo
+      .watchQuery({
+        query: GET_ASSETS,
+      })
+      .valueChanges.subscribe((response: any) => {
+        this.assets = response.data.assets;
+        this.calculate(this.assets);
+      });
   }
 
   createAsset(asset: IAsset): void {
-    this.assetsService.createAsset(asset).subscribe((asset) => {
-      this.assets.push(asset);
-      this.calculate(this.assets);
-    });
+    this.apollo
+      .mutate({
+        mutation: CREATE_ASSET,
+        variables: {
+          data: {
+            name: asset.name,
+            value: asset.value,
+            date: asset.date,
+          },
+        },
+      })
+      .subscribe((response: any) => {
+        const data = response.data.createAsset;
+
+        const newAsset: IAsset = {
+          id: data.id,
+          name: data.name,
+          value: data.value,
+          date: data.date,
+        };
+
+        this.assets = [...this.assets, newAsset];
+
+        this.calculate(this.assets);
+      });
   }
 
   updateAsset(asset: IAsset): void {
-    this.assetsService.updateAsset(asset).subscribe((asset) => {
-      const index = this.assets.findIndex((a) => a.id === asset.id);
-      if (index >= 0) {
-        this.assets[index] = asset;
-      }
-      this.calculate(this.assets);
-    });
+    this.apollo
+      .mutate({
+        mutation: UPDATE_ASSET,
+        variables: {
+          data: {
+            id: asset.id,
+            name: asset.name,
+            value: asset.value,
+            date: asset.date,
+          },
+        },
+      })
+      .subscribe((response: any) => {
+        const data = response.data.updateAsset;
+
+        const updatedAsset: IAsset = {
+          id: data.id,
+          name: data.name,
+          value: data.value,
+          date: data.date,
+        };
+
+        this.assets = this.assets.map((a) =>
+          a.id === updatedAsset.id ? updatedAsset : a
+        );
+
+        this.calculate(this.assets);
+      });
   }
 
   deleteAsset(asset: IAsset): void {
-    this.assetsService.deleteAsset(asset).subscribe((asset) => {
-      this.assets = this.assets.filter((a) => a.id !== asset.id);
-      this.calculate(this.assets);
-    });
+    this.apollo
+      .mutate({
+        mutation: DELETE_ASSET,
+        variables: {
+          id: asset.id,
+        },
+      })
+      .subscribe((response: any) => {
+        const id = response.data.deleteAsset;
+
+        this.assets = this.assets.filter((a) => a.id !== id);
+
+        this.calculate(this.assets);
+      });
   }
   openModal(value: boolean): void {
     this.isOpenModal = value;
