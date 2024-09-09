@@ -20,7 +20,7 @@ export class ModalFormComponent implements OnInit {
 
   name: string = '';
   value: number = 0;
-  date: string | Date | null | undefined = undefined;
+  date?: string;
 
   title: string = 'Adicionar Bem';
 
@@ -71,6 +71,6 @@ export class ModalFormComponent implements OnInit {
   resetValues() {
     this.name = '';
     this.value = 0;
-    this.date = null;
+    this.date = undefined;
   }
 }

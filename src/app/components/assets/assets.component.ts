@@ -11,6 +11,15 @@ import {
   GET_ASSETS,
   UPDATE_ASSET,
 } from '../../graphql/graphql.operations';
+import {
+  CreateAssetResponse,
+  CreateAssetVariables,
+  DeleteAssetResponse,
+  DeleteAssetVariables,
+  getAssetsResponse,
+  UpdateAssetResponse,
+  updateAssetVariables,
+} from '../../graphql/graphql.types';
 
 @Component({
   selector: 'app-assets',
@@ -33,10 +42,10 @@ export class AssetsComponent implements OnInit {
 
   getAssets() {
     this.apollo
-      .watchQuery({
+      .watchQuery<getAssetsResponse>({
         query: GET_ASSETS,
       })
-      .valueChanges.subscribe((response: any) => {
+      .valueChanges.subscribe((response) => {
         this.assets = response.data.assets;
         this.calculate(this.assets);
       });
@@ -44,35 +53,37 @@ export class AssetsComponent implements OnInit {
 
   createAsset(asset: IAsset): void {
     this.apollo
-      .mutate({
+      .mutate<CreateAssetResponse, CreateAssetVariables>({
         mutation: CREATE_ASSET,
         variables: {
           data: {
             name: asset.name,
             value: asset.value,
-            date: asset.date,
+            date: asset?.date,
           },
         },
       })
-      .subscribe((response: any) => {
-        const data = response.data.createAsset;
+      .subscribe((response) => {
+        const data = response.data?.createAsset;
 
-        const newAsset: IAsset = {
-          id: data.id,
-          name: data.name,
-          value: data.value,
-          date: data.date,
-        };
+        if (data) {
+          const newAsset: IAsset = {
+            id: data.id,
+            name: data.name,
+            value: data.value,
+            date: data.date,
+          };
 
-        this.assets = [...this.assets, newAsset];
+          this.assets = [...this.assets, newAsset];
 
-        this.calculate(this.assets);
+          this.calculate(this.assets);
+        }
       });
   }
 
   updateAsset(asset: IAsset): void {
     this.apollo
-      .mutate({
+      .mutate<UpdateAssetResponse, updateAssetVariables>({
         mutation: UPDATE_ASSET,
         variables: {
           data: {
@@ -83,34 +94,36 @@ export class AssetsComponent implements OnInit {
           },
         },
       })
-      .subscribe((response: any) => {
-        const data = response.data.updateAsset;
+      .subscribe((response) => {
+        const data = response.data?.updateAsset;
 
-        const updatedAsset: IAsset = {
-          id: data.id,
-          name: data.name,
-          value: data.value,
-          date: data.date,
-        };
+        if (data) {
+          const updatedAsset: IAsset = {
+            id: data.id,
+            name: data.name,
+            value: data.value,
+            date: data.date,
+          };
 
-        this.assets = this.assets.map((a) =>
-          a.id === updatedAsset.id ? updatedAsset : a
-        );
+          this.assets = this.assets.map((a) =>
+            a.id === updatedAsset.id ? updatedAsset : a
+          );
 
-        this.calculate(this.assets);
+          this.calculate(this.assets);
+        }
       });
   }
 
   deleteAsset(asset: IAsset): void {
     this.apollo
-      .mutate({
+      .mutate<DeleteAssetResponse, DeleteAssetVariables>({
         mutation: DELETE_ASSET,
         variables: {
           id: asset.id,
         },
       })
-      .subscribe((response: any) => {
-        const id = response.data.deleteAsset;
+      .subscribe((response) => {
+        const id = response.data?.deleteAsset;
 
         this.assets = this.assets.filter((a) => a.id !== id);
 

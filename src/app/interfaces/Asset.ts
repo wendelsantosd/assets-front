@@ -2,7 +2,7 @@ export interface IAsset {
   id?: string;
   name: string;
   value: number;
-  date?: string | Date | null;
+  date?: string;
   createdAt?: string;
   updatedAt?: string;
 }
