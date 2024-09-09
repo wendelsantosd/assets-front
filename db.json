@@ -1,10 +1,15 @@
 {
   "assets": [
     {
-      "id": "d2e6",
+      "id": "4741",
+      "name": "Mulher",
+      "value": 3000.2,
+      "date": "2024-09-05"
+    },
+    {
+      "id": "fc35",
       "name": "Cadeira",
-      "value": 100000,
-      "date": "2024-09-10"
+      "value": 3000
     }
   ]
 }
