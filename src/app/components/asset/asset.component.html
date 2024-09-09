@@ -2,17 +2,23 @@
   <h3>
     {{asset.name}}
     <div class="icons">
-      <fa-icon [icon]="faPen"
+      <fa-icon
+        [icon]="faPen"
         [ngStyle]="{'fontSize': '20px', 'color': 'green', 'marginRight': '8px', 'marginBottom': '2px', 'cursor': 'pointer'}"
         (click)="onSelect(asset)">
       </fa-icon>
-      <fa-icon [icon]="faTimes" [ngStyle]="{'color': 'red', 'cursor': 'pointer'}" (click)="onDelete(asset)">
+      <fa-icon
+        [icon]="faTimes"
+        [ngStyle]="{'color': 'red', 'cursor': 'pointer'}"
+        (click)="onDelete(asset)">
       </fa-icon>
     </div>
   </h3>
 
   <div>
     <p>Valor: {{asset.value | currency:'BRL'}}</p>
-    <p *ngIf="asset.date" class="date">Aquisição: {{asset.date | date:'dd/MM/yyyy' }}</p>
+    <p *ngIf="asset.date" class="date">
+      Aquisição: {{asset.date | date:'dd/MM/yyyy' }}
+    </p>
   </div>
 </div>
