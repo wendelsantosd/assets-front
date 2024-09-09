@@ -1,7 +1,7 @@
 <div class="wrapper-form">
   <form (ngSubmit)="onSubmit()" class="modal-form">
     <div>
-      <h3>Adicionar Bem <fa-icon [icon]="faTimes" [ngStyle]="{'cursor': 'pointer'}" (click)="closeModal()"></fa-icon>
+      <h3>{{title}} <fa-icon [icon]="faTimes" [ngStyle]="{'cursor': 'pointer'}" (click)="closeModal()"></fa-icon>
       </h3>
 
       <label for="name">Bem:</label>
@@ -15,6 +15,6 @@
       <input id="date" type="date" name="date" class="form-control" [(ngModel)]="date" />
     </div>
 
-    <input type="submit" value="Salvar Bem" class="btn btn-block" />
+    <input type="submit" value="Salvar" class="btn btn-block" [ngStyle]="{'background': '#008000'}" />
   </form>
 </div>

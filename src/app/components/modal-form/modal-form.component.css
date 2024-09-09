@@ -21,6 +21,11 @@
   z-index: 1000;
 }
 
+
+.modal-form input {
+  margin-bottom: 16px;
+}
+
 .wrapper-form .modal-form h3 {
   display: flex;
   align-items: center;

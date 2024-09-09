@@ -22,11 +22,14 @@ export class ModalFormComponent implements OnInit {
   value: number = 0;
   date: string | Date | null | undefined = undefined;
 
+  title: string = 'Adicionar Bem';
+
   ngOnInit(): void {
     if (this.selectedAsset) {
       this.name = this.selectedAsset.name;
       this.value = this.selectedAsset.value;
       this.date = this.selectedAsset.date;
+      this.title = !this.selectedAsset.id ? 'Adicionar Bem' : 'Editar Bem';
     }
   }
 
