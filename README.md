@@ -1,27 +1,54 @@
-# AssetsFront
+<div>
+<h1 align="center">
+  Assets Front
+</h1>
+</div>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.3.
+<div align="center">
 
-## Development server
+<img src="https://img.shields.io/badge/Angular-18.2.3-dd0031">
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+<img src="https://img.shields.io/badge/Typescript-5.3.3-3198c6">
 
-## Code scaffolding
+<img src="https://img.shields.io/badge/GraphQL-16.9.0-e10098">
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+</div>
 
-## Build
+# Overview
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+An application for registering user assets, built with Angular 18, GraphQL and TypeScript.
 
-## Running unit tests
+# Installation
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+1. Clone the repository:
+```bash
+git clone https://github.com/wendelsantosd/assets-front.git
+```
 
-## Running end-to-end tests
+2. Install the dependencies:
+```bash
+yarn
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+3. If needed, add your custom GraphQL URL to the `apiURL` field located in `/src/environments/environment.ts`. (default: `http://localhost:3000/graphql`)
 
-## Further help
+6. Start the application.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```bash
+yarn start
+```
+
+# Application Running
+
+```bash
+  http://localhost:4200/
+```
+
+# Contact
+
+<p style="font-size: 18px;">
+Wendel Santos, 2024.
+</p>
+<p style="font-size: 18px;">
+wendelwcsantos@gmail.com
+</p>
